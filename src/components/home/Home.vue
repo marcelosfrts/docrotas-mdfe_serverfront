@@ -1,6 +1,7 @@
 <template>
     <div class="home">
-        <PageTitle icon="fa fa-home" main="" sub=""/>
+        <!-- <PageTitle icon="fa fa-home" main="" sub=""/> -->
+        <PageTitle main="" sub=""/>
     </div>
 </template>
 

@@ -14,15 +14,15 @@
             <button v-else @click="signin">Entrar</button>
 
             <a href @click.prevent="showSignup = !showSignup">
-                <span v-if="showSignup">Já possui cadastro? Acesse o login!</span>
-                <span v-else>Não tem cadastro? Registre-se aqui!</span>
+                <!-- <span v-if="showSignup">Já possui cadastro? Acesse o login!</span>
+                <span v-else>Não tem cadastro? Registre-se aqui!</span> -->
             </a>
         </div>
     </div>
 </template>
 
 <script>
-import { baseApiUrl, showError } from '@/global'
+import { baseApiUrl, showError, userKey } from '@/global'
 import axios from 'axios'
 
 export default {
@@ -38,7 +38,7 @@ export default {
             axios.post(`${baseApiUrl}/login`, this.user)
             .then(res => {
                 this.$store.commit('setUser', res.headers.authorization.replace('Bearer ', ''))
-                localStorage.setItem('_auth_docrotas', res.headers.authorization.replace('Bearer ', ''))
+                localStorage.setItem(userKey, res.headers.authorization.replace('Bearer ', ''))
                 this.$router.push({ path: '/' })
             })
             .catch(showError)
