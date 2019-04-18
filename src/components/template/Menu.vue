@@ -23,7 +23,7 @@ export default {
             treeFilter: '',
             treeData: this.getTreeData(),
             treeOptions: {
-                propertyNames: { 'text': 'root-menu' },
+                propertyNames: { 'text': 'root-menu', 'children':'sub-menu' },
                 filter: { emptyText: 'Menu não encontrado' }
             }
         }
