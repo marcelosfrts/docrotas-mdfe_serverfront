@@ -32,7 +32,15 @@ export default {
         getTreeData() {
             const url = `${baseApiUrl}/menu`
             return axios.post(url).then(res => res.data)
+        },
+        onNodeSelect(node) {
+            this.$router.push({
+                name: node.text.toLowerCase()
+            })
         }
+    },
+    mounted() {
+        this.$refs.tree.$on('node:selected', this.onNodeSelect)
     }
 }
 </script>
