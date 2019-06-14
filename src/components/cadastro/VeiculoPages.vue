@@ -1,11 +1,11 @@
 <template>
     <div class="veiculo-pages">
-        <PageTitle icon="fa fa-cogs" main="veiculos" sub="Configurações"/>
+        <PageTitle icon="fa fa-cogs" main="Veículos" sub="Pesquisa"/>
         <div class="veiculo-pages-tabs">
             <b-card no-body>
                 <b-tabs card>
-                    <b-tab title="veiculos" active>
-                        <UserAdmin/>
+                    <b-tab title="Veículos" active>
+                        <Veiculo/>
                     </b-tab>
                 </b-tabs>
             </b-card>

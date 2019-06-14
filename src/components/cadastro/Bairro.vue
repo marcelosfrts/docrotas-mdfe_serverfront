@@ -1,5 +1,5 @@
 <template>
-    <div class="action-state">
+    <div class="action-neighborhood">
         <div class="row my-0" v-if="isForm">
             <div class="col-md-1 text-center">
                 <b-button variant="outline-success" size="sm" @click="saveEntity()">
@@ -26,27 +26,17 @@
         </div>
         <hr/>
         <div v-if="isForm">
-            <div class="formState">
+            <div class="formNeighborhood">
                 <b-form>
                     <b-row align-h="start">
                         <b-col sm="2">
-                            <b-form-group id="group-id-state" label="Código" label-for="id-state">
-                                <b-form-input id="id-state" v-model="state.id" type="text" disabled></b-form-input>
-                            </b-form-group>
-                        </b-col>
-                        <b-col sm="2">
-                            <b-form-group id="group-ibge" label="Cód. IBGE" label-for="ibge">
-                                <b-form-input id="ibge" v-model="state.ibge" type="text"></b-form-input>
-                            </b-form-group>
-                        </b-col>
-                        <b-col sm="2">
-                            <b-form-group id="group-sigla" label="Sigla" label-for="sigla">
-                                <b-form-input id="sigla" v-model="state.sigla" type="text"></b-form-input>
+                            <b-form-group id="group-id-neighborhood" label="Código" label-for="id-neighborhood">
+                                <b-form-input id="id-neighborhood" v-model="neighborhood.id" type="text" disabled></b-form-input>
                             </b-form-group>
                         </b-col>
                         <b-col sm="2">
                             <b-form-group id="group-nome" label="Nome" label-for="nome">
-                                <b-form-input id="nome" v-model="state.nome" type="text"></b-form-input>
+                                <b-form-input id="nome" v-model="neighborhood.nome" type="text"></b-form-input>
                             </b-form-group>
                         </b-col>
                     </b-row>
@@ -54,8 +44,8 @@
             </div>
         </div>
         <div v-else>
-            <div class="gridState">
-                <b-table hover :items="states" :fields="fields">
+            <div class="gridNeighborhood">
+                <b-table hover :items="neighborhoods" :fields="fields">
                     <template slot=" " slot-scope="row">
                         <b-button variant="outline-secondary" size="sm-3" @click="editEntity(row.item)">
                             <i class="fa fa-search"></i>
@@ -72,16 +62,12 @@ import { baseApiUrl, showError } from '@/global'
 import axios from 'axios'
 
 export default {
-    name: 'Estado',
+    name: 'Bairro',
     data: function() {
         return {
             isForm: false,
-            state: { id: null,
-                     ibge: null,
-                     nome: null,
-                     sigla: null
-                   },
-            states: [],
+            neighborhood: { id: null, nome: null},
+            neighborhoods: [],
             fields: [
                 { key: ' ',
                   label: null
@@ -90,16 +76,8 @@ export default {
                   label: 'Código',
                   sortable: true
                 },
-                { key: 'ibge',
-                  label: 'Cód.IBGE',
-                  sortable: true
-                },
-                { key: 'sigla',
-                  label: 'Sigla',
-                  sortable: true
-                },
                 { key: 'nome',
-                  label: 'Estado',
+                  label: 'Bairro',
                   sortable: true
                 }
             ]
@@ -107,15 +85,15 @@ export default {
     },
     methods: {
         loadEntity() {
-            const url = `${baseApiUrl}/states`
+            const url = `${baseApiUrl}/neighborhoods`
             axios.get(url).then(res => {
-                this.states = res.data
+                this.neighborhoods = res.data
             })
             .catch(showError)
         },
         saveEntity() {
-            const url = `${baseApiUrl}/state`
-            axios.post(url, this.state).then(res => {
+            const url = `${baseApiUrl}/neighborhood`
+            axios.post(url, this.neighborhood).then(res => {
                 this.resetEntity()
                 this.colapsePanel()
                 this.loadEntity()
@@ -123,7 +101,7 @@ export default {
             .catch(showError)
         },
         editEntity(row) {
-            this.state = row
+            this.neighborhood = row
             this.colapsePanel()
         },
         newEntity() {
@@ -135,10 +113,8 @@ export default {
            this.loadEntity()
         },
         resetEntity() {
-            this.state.id = null
-            this.state.ibge = null
-            this.state.sigla = null
-            this.state.nome = null
+            this.neighborhood.id = null
+            this.neighborhood.nome = null
         },
         colapsePanel() {
             this.isForm = !this.isForm

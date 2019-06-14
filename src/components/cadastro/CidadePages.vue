@@ -1,11 +1,11 @@
 <template>
     <div class="cidade-pages">
-        <PageTitle icon="fa fa-cogs" main="cidades" sub="Configurações"/>
+        <PageTitle icon="fa fa-cogs" main="Cidades" sub="Pesquisa"/>
         <div class="cidade-pages-tabs">
             <b-card no-body>
                 <b-tabs card>
-                    <b-tab title="cidades" active>
-                        <UserAdmin/>
+                    <b-tab title="Cidades" active>
+                        <Cidade/>
                     </b-tab>
                 </b-tabs>
             </b-card>

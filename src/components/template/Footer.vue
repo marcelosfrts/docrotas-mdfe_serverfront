@@ -12,6 +12,12 @@ export default {
 
 <style>
     .footer {
+        position: fixed;
+        left: 0;
+        top: 95%;
+        width: 100%;
+        z-index: 200;
+        height: 42px;
         grid-area: footer;
         background-color: #DDD;
         color: #333;

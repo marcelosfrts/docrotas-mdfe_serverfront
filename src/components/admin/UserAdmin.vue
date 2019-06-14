@@ -32,8 +32,8 @@
         <div v-else>
             <div class="user-admin">
                 <b-table hover :items="users" :fields="fields">
-                    <template slot=" " slot-scopt="row">
-                        <b-button size="sm" variant="outline-primary" @click="alterUser()">Editar</b-button>
+                    <template slot="detalhes" slot-scope="row">
+                        <b-button size="sm" variant="outline-primary" @click="alterUser(row.item)">Editar</b-button>
                     </template>
                     <template slot="active" slot-scope="row">
                         {{ row.value ? 'Sim :)' : 'Não :(' }}
@@ -64,8 +64,8 @@ export default {
                   },
             users: [],
             fields: [
-                { key: ' ',
-                  label: null
+                { key: 'detalhes',
+                  label: 'Detalhes'
                 },
                 { key: 'id',
                   label: 'Código',
@@ -108,16 +108,16 @@ export default {
             })
             .catch(showError)
         },
-        alterUser(editUser) {
-            this.user = editUser.fields
+        alterUser(row) {
+            this.user = row
             this.colapsePanel()
         },
         resetUser() {
-            this.user.id = null,
-            this.user.idCompany = null,
-            this.user.user = null,
-            this.user.password = null,
-            this.user.active = false
+            this.newUser.id = null,
+            this.newUser.idCompany = null,
+            this.newUser.user = null,
+            this.newUser.password = null,
+            this.newUser.active = false
         },
         colapsePanel() {
             this.isForm = !this.isForm
