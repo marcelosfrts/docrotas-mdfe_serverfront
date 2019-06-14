@@ -1,11 +1,11 @@
 <template>
     <div class="estado-pages">
-        <PageTitle icon="fa fa-cogs" main="Estados" sub="Configurações"/>
+        <PageTitle icon="fa fa-cogs" main="Estados" sub="Pesquisa"/>
         <div class="estado-pages-tabs">
             <b-card no-body>
                 <b-tabs card>
                     <b-tab title="Estados" active>
-                        <UserAdmin/>
+                        <Estado/>
                     </b-tab>
                 </b-tabs>
             </b-card>
@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import PageTitle from '../template/PageTitle'
-import Estado from './Estado'
+    import PageTitle from '../template/PageTitle'
+    import Estado from './Estado'
 
-export default {
-    name: 'EstadoPages',
-    components: { PageTitle, Estado }
-}
+    export default {
+        name: 'EstadoPages',
+        components: { PageTitle, Estado }
+    }
 </script>
 
 <style>

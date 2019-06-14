@@ -1,5 +1,5 @@
 <template>
-    <div class="action-state">
+    <div class="action-address">
         <div class="row my-0" v-if="isForm">
             <div class="col-md-1 text-center">
                 <b-button variant="outline-success" size="sm" @click="saveEntity()">
@@ -26,27 +26,22 @@
         </div>
         <hr/>
         <div v-if="isForm">
-            <div class="formState">
+            <div class="formAddress">
                 <b-form>
                     <b-row align-h="start">
                         <b-col sm="2">
-                            <b-form-group id="group-id-state" label="Código" label-for="id-state">
-                                <b-form-input id="id-state" v-model="state.id" type="text" disabled></b-form-input>
+                            <b-form-group id="group-id-address" label="Código" label-for="id-address">
+                                <b-form-input id="id-address" v-model="address.id" type="text" disabled></b-form-input>
                             </b-form-group>
                         </b-col>
                         <b-col sm="2">
-                            <b-form-group id="group-ibge" label="Cód. IBGE" label-for="ibge">
-                                <b-form-input id="ibge" v-model="state.ibge" type="text"></b-form-input>
+                            <b-form-group id="group-address" label="Endereço" label-for="endereco">
+                                <b-form-input id="endereco" v-model="address.endereco" type="text"></b-form-input>
                             </b-form-group>
                         </b-col>
                         <b-col sm="2">
-                            <b-form-group id="group-sigla" label="Sigla" label-for="sigla">
-                                <b-form-input id="sigla" v-model="state.sigla" type="text"></b-form-input>
-                            </b-form-group>
-                        </b-col>
-                        <b-col sm="2">
-                            <b-form-group id="group-nome" label="Nome" label-for="nome">
-                                <b-form-input id="nome" v-model="state.nome" type="text"></b-form-input>
+                            <b-form-group id="group-address" label="CEP" label-for="cep">
+                                <b-form-input id="cep" v-model="address.cep" type="text"></b-form-input>
                             </b-form-group>
                         </b-col>
                     </b-row>
@@ -54,8 +49,8 @@
             </div>
         </div>
         <div v-else>
-            <div class="gridState">
-                <b-table hover :items="states" :fields="fields">
+            <div class="gridAddress">
+                <b-table hover :items="adresses" :fields="fields">
                     <template slot=" " slot-scope="row">
                         <b-button variant="outline-secondary" size="sm-3" @click="editEntity(row.item)">
                             <i class="fa fa-search"></i>
@@ -72,16 +67,15 @@ import { baseApiUrl, showError } from '@/global'
 import axios from 'axios'
 
 export default {
-    name: 'Estado',
+    name: 'Endereco',
     data: function() {
         return {
             isForm: false,
-            state: { id: null,
-                     ibge: null,
-                     nome: null,
-                     sigla: null
-                   },
-            states: [],
+            address: { id: null,
+                       endereco: null,
+                       cep: null
+                    },
+            adresses: [],
             fields: [
                 { key: ' ',
                   label: null
@@ -90,16 +84,12 @@ export default {
                   label: 'Código',
                   sortable: true
                 },
-                { key: 'ibge',
-                  label: 'Cód.IBGE',
+                { key: 'endereco',
+                  label: 'Endereço',
                   sortable: true
                 },
-                { key: 'sigla',
-                  label: 'Sigla',
-                  sortable: true
-                },
-                { key: 'nome',
-                  label: 'Estado',
+                { key: 'cep',
+                  label: 'CEP',
                   sortable: true
                 }
             ]
@@ -107,23 +97,23 @@ export default {
     },
     methods: {
         loadEntity() {
-            const url = `${baseApiUrl}/states`
+            const url = `${baseApiUrl}/adresses`
             axios.get(url).then(res => {
-                this.states = res.data
+                this.adresses = res.data
             })
             .catch(showError)
         },
         saveEntity() {
-            const url = `${baseApiUrl}/state`
-            axios.post(url, this.state).then(res => {
+            const url = `${baseApiUrl}/address`
+            axios.post(url, this.address).then(res => {
                 this.resetEntity()
                 this.colapsePanel()
                 this.loadEntity()
             })
-            .catch(showError)
+            .catch(showErro)
         },
         editEntity(row) {
-            this.state = row
+            this.address = row
             this.colapsePanel()
         },
         newEntity() {
@@ -135,10 +125,9 @@ export default {
            this.loadEntity()
         },
         resetEntity() {
-            this.state.id = null
-            this.state.ibge = null
-            this.state.sigla = null
-            this.state.nome = null
+            this.address.id = null
+            this.address.cep = null
+            this.address.endereco = null
         },
         colapsePanel() {
             this.isForm = !this.isForm

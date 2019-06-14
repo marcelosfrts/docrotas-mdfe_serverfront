@@ -23,7 +23,7 @@ export default {
     },
     computed: {
         icon() {
-            return this.$store.state.isMenuVisible ? "fa-angle-left" : "fa-angle-down"
+            return this.$store.state.isMenuVisible ? "fa-angle-left" : "fa fa-navicon"
         }
     },
     methods: {
@@ -36,6 +36,12 @@ export default {
 
 <style>
     .header {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 200;
+        height: 60px;
         grid-area: header;
         background: linear-gradient(to right, #1e469a, #49a7c1);
         display: flex;

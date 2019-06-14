@@ -3,7 +3,8 @@
         <div class="user-button">
             <span class="d-none d-sm-block">{{ user.name }}</span>
             <div class="user-dropdown-img">
-                <Gravatar hash="55bb8e1d4c42184752508b04215d2179" alt="User" />
+                <!--Gravatar hash="55bb8e1d4c42184752508b04215d2179" alt="User" /-->
+                <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&amp;f=y">
             </div>
             <i class="fa fa-angle-down"></i>
         </div>
@@ -59,7 +60,7 @@ export default {
     }
 
     .user-dropdown-img > img {
-        max-height: 37px;
+        max-height: 50px;
         border-radius: 5px;
     }
 
@@ -67,7 +68,7 @@ export default {
         position: absolute;
         right: 0px;
         background-color: #f9f9f9;
-        min-width: 198px;
+        min-width: 200px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         padding: 8px;
         z-index: 1;
